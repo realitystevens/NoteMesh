@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A personal knowledge management system for organizing notes and ideas.">
+    <meta name="keywords" content="knowledge management, notes, personal, organization, productivity">
+    <meta property="og:title" content="Note Mesh | Personal Knowledge Management System">
+    <meta property="og:description" content="A personal knowledge management system for organizing notes and ideas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://realitystevens.github.io/notemesh/">
+    <meta property="og:site_name" content="Note Mesh">
+    <title>Note Mesh | Personal Knowledge Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Personal Knowledge Management System</h1>
+            <button id="newNoteBtn">New Note</button>
+        </header>
+        <main>
+            <div id="notes"></div>
+            <div id="note-editor" class="hidden">
+                <input type="text" id="note-title" placeholder="Note Title" />
+                <textarea id="note-content" placeholder="Start writing..."></textarea>
+                <input type="text" id="note-tags" placeholder="Tags (comma-separated)" />
+                <button id="saveNoteBtn">Save Note</button>
+                <button id="cancelNoteBtn">Cancel</button>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
