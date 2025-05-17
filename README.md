@@ -4,4 +4,6 @@
 
 Inspired by tools like Obsidian, Notion, and Roam Research.
 
+Built using pure Vanilla Javascript and Object Orientated programming in Javascript.
+
 [realitystevens.github.io/notemesh](https://realitystevens.github.io/NoteMesh)
