@@ -3,36 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A personal knowledge management system for organizing notes and ideas.">
-    <meta name="keywords" content="knowledge management, notes, personal, organization, productivity">
-    <meta property="og:title" content="Note Mesh | Personal Knowledge Management System">
-    <meta property="og:description" content="A personal knowledge management system for organizing notes and ideas.">
+    <meta name="description" content="NoteMesh - A powerful personal knowledge management system for organizing, linking, and discovering your notes, ideas, and projects.">
+    <meta name="keywords" content="knowledge management, notes, personal, organization, productivity, PKM, second brain, obsidian alternative">
+    <meta property="og:title" content="NoteMesh | Personal Knowledge Management System">
+    <meta property="og:description" content="A powerful personal knowledge management system for organizing, linking, and discovering your notes, ideas, and projects.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://realitystevens.github.io/notemesh/">
-    <meta property="og:site_name" content="Note Mesh">
-    <title>Note Mesh | Personal Knowledge Management System</title>
+    <meta property="og:site_name" content="NoteMesh">
+    <title>NoteMesh | Personal Knowledge Management System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 </head>
-<body>
+<body data-theme="light">
     <div id="app">
-        <header>
-            <h1>Personal Knowledge Management System</h1>
-            <button id="newNoteBtn">New Note</button>
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-spinner"></div>
+            <h2>NoteMesh</h2>
+            <p>Loading your knowledge...</p>
+        </div>
+
+        <!-- Main Navigation Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10 9 10s9-4.45 9-10V7l-10-5z"/>
+                        <path d="M12 22V12"/>
+                        <path d="M6 13L12 7l6 6"/>
+                    </svg>
+                    <span class="logo-text">NoteMesh</span>
+                </div>
+                <nav class="main-nav">
+                    <button class="nav-btn active" data-view="notes">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                        </svg>
+                        Notes
+                    </button>
+                    <button class="nav-btn" data-view="graph">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="18" cy="5" r="3"/>
+                            <circle cx="6" cy="12" r="3"/>
+                            <circle cx="18" cy="19" r="3"/>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                        </svg>
+                        Graph
+                    </button>
+                    <button class="nav-btn" data-view="tags">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                        </svg>
+                        Tags
+                    </button>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="global-search" placeholder="Search notes, tags, content..." autocomplete="off">
+                    <div id="search-results" class="search-results hidden"></div>
+                </div>
+                <button id="theme-toggle" class="icon-btn" title="Toggle theme">
+                    <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="theme-icon moon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button id="new-note-btn" class="primary-btn">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    New Note
+                </button>
+            </div>
         </header>
-        <main>
-            <div id="notes"></div>
-            <div id="note-editor" class="hidden">
-                <input type="text" id="note-title" placeholder="Note Title" />
-                <textarea id="note-content" placeholder="Start writing..."></textarea>
-                <input type="text" id="note-tags" placeholder="Tags (comma-separated)" />
-                <button id="saveNoteBtn">Save Note</button>
-                <button id="cancelNoteBtn">Cancel</button>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="action-btn" id="new-note-sidebar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            New Note
+                        </button>
+                        <button class="action-btn" id="random-note">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                            Random Note
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Filters & Sort</h3>
+                    <div class="filter-controls">
+                        <select id="sort-select" class="filter-select">
+                            <option value="updated">Last Updated</option>
+                            <option value="created">Date Created</option>
+                            <option value="title">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                        <select id="tag-filter" class="filter-select">
+                            <option value="">All Tags</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Recent Notes</h3>
+                    <div id="recent-notes" class="recent-notes"></div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Statistics</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-notes">0</span>
+                            <span class="stat-label">Notes</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-tags">0</span>
+                            <span class="stat-label">Tags</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-words">0</span>
+                            <span class="stat-label">Words</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Notes View -->
+                <div id="notes-view" class="view active">
+                    <div class="view-header">
+                        <h2 class="view-title">All Notes</h2>
+                        <div class="view-controls">
+                            <button class="view-toggle" data-layout="grid" title="Grid view">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                            </button>
+                            <button class="view-toggle active" data-layout="list" title="List view">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="8" y1="6" x2="21" y2="6"/>
+                                    <line x1="8" y1="12" x2="21" y2="12"/>
+                                    <line x1="8" y1="18" x2="21" y2="18"/>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="notes-container" class="notes-container list-layout"></div>
+                </div>
+
+                <!-- Graph View -->
+                <div id="graph-view" class="view">
+                    <div class="view-header">
+                        <h2 class="view-title">Knowledge Graph</h2>
+                        <div class="graph-controls">
+                            <button id="center-graph" class="icon-btn" title="Center graph">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="m8.5 8.5L7 7"/>
+                                    <path d="m15.5 8.5L17 7"/>
+                                    <path d="m15.5 15.5L17 17"/>
+                                    <path d="m8.5 15.5L7 17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="graph-container" class="graph-container"></div>
+                </div>
+
+                <!-- Tags View -->
+                <div id="tags-view" class="view">
+                    <div class="view-header">
+                        <h2 class="view-title">Tags</h2>
+                    </div>
+                    <div id="tags-container" class="tags-container"></div>
+                </div>
             </div>
         </main>
+
+        <!-- Note Editor Modal -->
+        <div id="note-editor-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="editor-title">New Note</h2>
+                    <button id="close-editor" class="icon-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="editor-container">
+                        <input type="text" id="note-title" placeholder="Note title..." class="title-input">
+                        <textarea id="note-content" placeholder="Start writing your note..." class="content-input"></textarea>
+                        <div class="editor-footer">
+                            <div class="tags-input-container">
+                                <input type="text" id="note-tags" placeholder="Add tags (comma-separated)..." class="tags-input">
+                                <div id="suggested-tags" class="suggested-tags"></div>
+                            </div>
+                            <div class="editor-actions">
+                                <button id="save-note" class="primary-btn">
+                                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="m9 12 2 2 4-4"/>
+                                        <path d="M21 12c.552 0 1-.448 1-1V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6c0-.552-.448-1-1-1"/>
+                                    </svg>
+                                    Save Note
+                                </button>
+                                <button id="cancel-editor" class="secondary-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Note Detail Modal -->
+        <div id="note-detail-modal" class="modal hidden">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2 id="detail-title"></h2>
+                    <div class="detail-actions">
+                        <button id="edit-note" class="icon-btn" title="Edit note">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                        </button>
+                        <button id="delete-note" class="icon-btn danger" title="Delete note">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="3,6 5,6 21,6"/>
+                                <path d="m19,6v14a2,2 0 0,1-2,2H7a2,2 0 0,1-2-2V6m3,0V4a2,2 0 0,1 2-2h4a2,2 0 0,1 2,2v2"/>
+                                <line x1="10" y1="11" x2="10" y2="17"/>
+                                <line x1="14" y1="11" x2="14" y2="17"/>
+                            </svg>
+                        </button>
+                        <button id="close-detail" class="icon-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="note-meta">
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            Created: <span id="detail-created"></span>
+                        </span>
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                            </svg>
+                            Updated: <span id="detail-updated"></span>
+                        </span>
+                    </div>
+                    <div id="detail-content" class="note-content"></div>
+                    <div id="detail-tags" class="note-tags"></div>
+                    <div id="linked-notes" class="linked-notes"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="notification" class="notification hidden">
+            <div class="notification-content">
+                <svg class="notification-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="m9 12 2 2 4-4"/>
+                    <path d="M21 12c.552 0 1-.448 1-1V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6c0-.552-.448-1-1-1"/>
+                </svg>
+                <span class="notification-text"></span>
+            </div>
+        </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="utils.js"></script>
+    <script src="graph.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
