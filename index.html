@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 </head>
@@ -30,70 +31,36 @@
         <header class="main-header">
             <div class="header-left">
                 <div class="logo">
-                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M12 2L2 7v10c0 5.55 3.84 10 9 10s9-4.45 9-10V7l-10-5z"/>
-                        <path d="M12 22V12"/>
-                        <path d="M6 13L12 7l6 6"/>
-                    </svg>
+                    <span class="logo-icon material-icons">hub</span>
                     <span class="logo-text">NoteMesh</span>
                 </div>
                 <nav class="main-nav">
                     <button class="nav-btn active" data-view="notes">
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14,2 14,8 20,8"/>
-                        </svg>
+                        <span class="nav-icon material-icons">description</span>
                         Notes
                     </button>
                     <button class="nav-btn" data-view="graph">
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <circle cx="18" cy="5" r="3"/>
-                            <circle cx="6" cy="12" r="3"/>
-                            <circle cx="18" cy="19" r="3"/>
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                        </svg>
+                        <span class="nav-icon material-icons">account_tree</span>
                         Graph
                     </button>
                     <button class="nav-btn" data-view="tags">
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-                            <line x1="7" y1="7" x2="7.01" y2="7"/>
-                        </svg>
+                        <span class="nav-icon material-icons">local_offer</span>
                         Tags
                     </button>
                 </nav>
             </div>
             <div class="header-right">
                 <div class="search-container">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35"/>
-                    </svg>
+                    <span class="search-icon material-icons">search</span>
                     <input type="text" id="global-search" placeholder="Search notes, tags, content..." autocomplete="off">
                     <div id="search-results" class="search-results hidden"></div>
                 </div>
                 <button id="theme-toggle" class="icon-btn" title="Toggle theme">
-                    <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="5"/>
-                        <line x1="12" y1="1" x2="12" y2="3"/>
-                        <line x1="12" y1="21" x2="12" y2="23"/>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                        <line x1="1" y1="12" x2="3" y2="12"/>
-                        <line x1="21" y1="12" x2="23" y2="12"/>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                    </svg>
-                    <svg class="theme-icon moon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
+                    <span class="theme-icon sun material-icons">light_mode</span>
+                    <span class="theme-icon moon hidden material-icons">dark_mode</span>
                 </button>
                 <button id="new-note-btn" class="primary-btn">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <line x1="12" y1="5" x2="12" y2="19"/>
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                    </svg>
+                    <span class="btn-icon material-icons">add</span>
                     New Note
                 </button>
             </div>
@@ -107,17 +74,11 @@
                     <h3 class="sidebar-title">Quick Actions</h3>
                     <div class="quick-actions">
                         <button class="action-btn" id="new-note-sidebar">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="12" y1="5" x2="12" y2="19"/>
-                                <line x1="5" y1="12" x2="19" y2="12"/>
-                            </svg>
+                            <span class="material-icons">add</span>
                             New Note
                         </button>
                         <button class="action-btn" id="random-note">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <polyline points="16 18 22 12 16 6"/>
-                                <polyline points="8 6 2 12 8 18"/>
-                            </svg>
+                            <span class="material-icons">shuffle</span>
                             Random Note
                         </button>
                     </div>
@@ -170,22 +131,10 @@
                         <h2 class="view-title">All Notes</h2>
                         <div class="view-controls">
                             <button class="view-toggle" data-layout="grid" title="Grid view">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <rect x="3" y="3" width="7" height="7"/>
-                                    <rect x="14" y="3" width="7" height="7"/>
-                                    <rect x="14" y="14" width="7" height="7"/>
-                                    <rect x="3" y="14" width="7" height="7"/>
-                                </svg>
+                                <span class="material-icons">grid_view</span>
                             </button>
                             <button class="view-toggle active" data-layout="list" title="List view">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <line x1="8" y1="6" x2="21" y2="6"/>
-                                    <line x1="8" y1="12" x2="21" y2="12"/>
-                                    <line x1="8" y1="18" x2="21" y2="18"/>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
-                                </svg>
+                                <span class="material-icons">view_list</span>
                             </button>
                         </div>
                     </div>
@@ -198,13 +147,7 @@
                         <h2 class="view-title">Knowledge Graph</h2>
                         <div class="graph-controls">
                             <button id="center-graph" class="icon-btn" title="Center graph">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <circle cx="12" cy="12" r="3"/>
-                                    <path d="m8.5 8.5L7 7"/>
-                                    <path d="m15.5 8.5L17 7"/>
-                                    <path d="m15.5 15.5L17 17"/>
-                                    <path d="m8.5 15.5L7 17"/>
-                                </svg>
+                                <span class="material-icons">center_focus_strong</span>
                             </button>
                         </div>
                     </div>
@@ -227,10 +170,7 @@
                 <div class="modal-header">
                     <h2 id="editor-title">New Note</h2>
                     <button id="close-editor" class="icon-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
+                        <span class="material-icons">close</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -244,10 +184,7 @@
                             </div>
                             <div class="editor-actions">
                                 <button id="save-note" class="primary-btn">
-                                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="m9 12 2 2 4-4"/>
-                                        <path d="M21 12c.552 0 1-.448 1-1V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6c0-.552-.448-1-1-1"/>
-                                    </svg>
+                                    <span class="btn-icon material-icons">save</span>
                                     Save Note
                                 </button>
                                 <button id="cancel-editor" class="secondary-btn">Cancel</button>
@@ -265,40 +202,24 @@
                     <h2 id="detail-title"></h2>
                     <div class="detail-actions">
                         <button id="edit-note" class="icon-btn" title="Edit note">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                            </svg>
+                            <span class="material-icons">edit</span>
                         </button>
                         <button id="delete-note" class="icon-btn danger" title="Delete note">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <polyline points="3,6 5,6 21,6"/>
-                                <path d="m19,6v14a2,2 0 0,1-2,2H7a2,2 0 0,1-2-2V6m3,0V4a2,2 0 0,1 2-2h4a2,2 0 0,1 2,2v2"/>
-                                <line x1="10" y1="11" x2="10" y2="17"/>
-                                <line x1="14" y1="11" x2="14" y2="17"/>
-                            </svg>
+                            <span class="material-icons">delete</span>
                         </button>
                         <button id="close-detail" class="icon-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="18" y1="6" x2="6" y2="18"/>
-                                <line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
+                            <span class="material-icons">close</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div class="note-meta">
                         <span class="meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
-                            </svg>
+                            <span class="material-icons">schedule</span>
                             Created: <span id="detail-created"></span>
                         </span>
                         <span class="meta-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-                            </svg>
+                            <span class="material-icons">edit</span>
                             Updated: <span id="detail-updated"></span>
                         </span>
                     </div>
@@ -312,10 +233,7 @@
         <!-- Notification Toast -->
         <div id="notification" class="notification hidden">
             <div class="notification-content">
-                <svg class="notification-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="m9 12 2 2 4-4"/>
-                    <path d="M21 12c.552 0 1-.448 1-1V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6c0-.552-.448-1-1-1"/>
-                </svg>
+                <span class="notification-icon material-icons">check_circle</span>
                 <span class="notification-text"></span>
             </div>
         </div>
