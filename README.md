@@ -149,27 +149,6 @@ NoteMesh is built with modern web technologies:
 - **HTML5**: Semantic markup with accessibility features
 - **Canvas API**: High-performance graph visualization
 
-### Key Components
-
-- **Note Class**: Core note data structure with linking capabilities
-- **NoteManager**: Note collection management with event system
-- **UIManager**: User interface controller and view management
-- **ThemeManager**: Theme switching and persistence
-- **GraphRenderer**: Interactive network visualization engine
-
-### File Structure
-
-```
-NoteMesh/
-├── index.html          # Main HTML structure
-├── style.css           # Complete styling system
-├── app.js              # Core application logic
-├── utils.js            # Utility functions library
-├── graph.js            # Graph visualization engine
-├── icons/              # SVG icons and assets
-│   └── favicon.svg     # Application favicon
-└── README.md           # This file
-```
 
 ## Customization
 
@@ -185,24 +164,6 @@ NoteMesh supports both light and dark themes. The theme system uses CSS custom p
   --text-primary: #1e293b;
   /* ... more variables */
 }
-```
-
-### Configuration
-
-Modify the configuration objects in the JavaScript files:
-
-```javascript
-// Graph appearance
-this.config = {
-  node: {
-    radius: 8,
-    colors: {
-      default: "#6366f1",
-      selected: "#f59e0b",
-    },
-  },
-  // ... more options
-};
 ```
 
 
