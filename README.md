@@ -55,15 +55,15 @@ Experience NoteMesh in action: **[NoteMesh Demo](https://realitystevens.github.i
 
 ### Main Interface
 
-![Main Interface](https://via.placeholder.com/600x400/f8fafc/1e293b?text=Notes+View)
+![Main Interface](https://raw.githubusercontent.com/realitystevens/NoteMesh/refs/heads/main/assets/interface_UI.jpg)
 
 ### Knowledge Graph
 
-![Knowledge Graph](https://via.placeholder.com/600x400/1e293b/6366f1?text=Interactive+Graph+View)
+![Knowledge Graph](https://raw.githubusercontent.com/realitystevens/NoteMesh/refs/heads/main/assets/knowledge_graph_UI.jpg)
 
 ### Dark Theme
 
-![Dark Theme](https://via.placeholder.com/600x400/0f172a/8b5cf6?text=Beautiful+Dark+Theme)
+![Dark Theme](https://raw.githubusercontent.com/realitystevens/NoteMesh/refs/heads/main/assets/dark_theme_UI.jpg)
 
 ## Installation
 
