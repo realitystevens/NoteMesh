@@ -30,6 +30,9 @@
         <!-- Main Navigation Header -->
         <header class="main-header">
             <div class="header-left">
+                <button id="mobile-menu-btn" class="mobile-menu-btn" title="Toggle menu">
+                    <span class="material-icons">menu</span>
+                </button>
                 <div class="logo">
                     <span class="logo-icon material-icons">hub</span>
                     <span class="logo-text">NoteMesh</span>
@@ -50,6 +53,9 @@
                 </nav>
             </div>
             <div class="header-right">
+                <button id="sidebar-toggle" class="sidebar-toggle" title="Toggle sidebar">
+                    <span class="material-icons">menu_open</span>
+                </button>
                 <div class="search-container">
                     <span class="search-icon material-icons">search</span>
                     <input type="text" id="global-search" placeholder="Search notes, tags, content..." autocomplete="off">
@@ -66,8 +72,44 @@
             </div>
         </header>
 
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-nav-overlay" class="mobile-nav-overlay hidden">
+            <div class="mobile-nav-header">
+                <div class="logo">
+                    <span class="logo-icon material-icons">hub</span>
+                    <span class="logo-text">NoteMesh</span>
+                </div>
+                <button id="close-mobile-nav" class="icon-btn">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                <button class="mobile-nav-btn active" data-view="notes">
+                    <span class="nav-icon material-icons">description</span>
+                    Notes
+                </button>
+                <button class="mobile-nav-btn" data-view="graph">
+                    <span class="nav-icon material-icons">account_tree</span>
+                    Graph
+                </button>
+                <button class="mobile-nav-btn" data-view="tags">
+                    <span class="nav-icon material-icons">local_offer</span>
+                    Tags
+                </button>
+            </nav>
+            <div class="mobile-nav-actions">
+                <button class="primary-btn" id="mobile-new-note">
+                    <span class="btn-icon material-icons">add</span>
+                    New Note
+                </button>
+            </div>
+        </div>
+
         <!-- Main Content Area -->
         <main class="main-content">
+            <!-- Sidebar Overlay for Mobile -->
+            <div id="sidebar-overlay" class="sidebar-overlay"></div>
+            
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-section">

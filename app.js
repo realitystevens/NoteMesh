@@ -405,6 +405,16 @@ class UIManager {
         // Notification
         this.notification = document.getElementById('notification');
         this.notificationText = document.querySelector('.notification-text');
+        
+        // Mobile elements
+        this.mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        this.mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+        this.closeMobileNavBtn = document.getElementById('close-mobile-nav');
+        this.mobileNavButtons = document.querySelectorAll('.mobile-nav-btn');
+        this.mobileNewNoteBtn = document.getElementById('mobile-new-note');
+        this.sidebarOverlay = document.getElementById('sidebar-overlay');
+        this.sidebar = document.querySelector('.sidebar');
+        this.sidebarToggle = document.getElementById('sidebar-toggle');
     }
 
     bindEvents() {
@@ -493,6 +503,49 @@ class UIManager {
         document.addEventListener('keydown', (e) => {
             this.handleKeyboardShortcuts(e);
         });
+        
+        // Mobile menu events
+        this.mobileMenuBtn?.addEventListener('click', () => {
+            this.toggleMobileNav();
+        });
+        
+        this.closeMobileNavBtn?.addEventListener('click', () => {
+            this.closeMobileNav();
+        });
+        
+        this.mobileNavButtons?.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.switchView(e.target.dataset.view);
+                this.closeMobileNav();
+            });
+        });
+        
+        this.mobileNewNoteBtn?.addEventListener('click', () => {
+            this.openNoteEditor();
+            this.closeMobileNav();
+        });
+        
+        // Sidebar overlay events
+        this.sidebarOverlay?.addEventListener('click', () => {
+            this.closeSidebar();
+        });
+        
+        // Sidebar toggle button
+        this.sidebarToggle?.addEventListener('click', () => {
+            this.toggleSidebar();
+        });
+        
+        // Mobile nav overlay events
+        this.mobileNavOverlay?.addEventListener('click', (e) => {
+            if (e.target === this.mobileNavOverlay) {
+                this.closeMobileNav();
+            }
+        });
+        
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            this.handleResize();
+        });
     }
 
     setupNoteManagerListeners() {
@@ -538,6 +591,11 @@ class UIManager {
         
         // Update nav buttons
         this.navButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === view);
+        });
+        
+        // Update mobile nav buttons
+        this.mobileNavButtons?.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.view === view);
         });
         
@@ -951,6 +1009,23 @@ class UIManager {
     }
 
     handleKeyboardShortcuts(e) {
+        // Don't trigger shortcuts when typing in inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            return;
+        }
+        
+        // Close mobile elements on Escape
+        if (e.key === 'Escape') {
+            if (!this.mobileNavOverlay.classList.contains('hidden')) {
+                this.closeMobileNav();
+                return;
+            }
+            if (this.sidebar.classList.contains('open')) {
+                this.closeSidebar();
+                return;
+            }
+        }
+        
         // Ctrl/Cmd + N: New note
         if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
             e.preventDefault();
@@ -997,6 +1072,56 @@ class UIManager {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    // Mobile Navigation Methods
+    toggleMobileNav() {
+        this.mobileNavOverlay.classList.toggle('hidden');
+        if (!this.mobileNavOverlay.classList.contains('hidden')) {
+            this.updateMobileNavButtons();
+        }
+    }
+
+    closeMobileNav() {
+        this.mobileNavOverlay.classList.add('hidden');
+    }
+
+    updateMobileNavButtons() {
+        this.mobileNavButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === this.currentView);
+        });
+    }
+
+    toggleSidebar() {
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            this.sidebar.classList.toggle('open');
+            this.sidebarOverlay.classList.toggle('show');
+            
+            // Prevent body scroll when sidebar is open
+            if (this.sidebar.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+    }
+
+    closeSidebar() {
+        this.sidebar.classList.remove('open');
+        this.sidebarOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    // Handle window resize
+    handleResize() {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (!isMobile) {
+            // Close mobile elements when switching to desktop
+            this.closeMobileNav();
+            this.closeSidebar();
+        }
     }
 }
 
