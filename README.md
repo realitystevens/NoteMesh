@@ -2,7 +2,9 @@
 
 **A powerful Personal Knowledge Management System** for organizing, linking, and discovering your notes, ideas, and projects. Built with modern web technologies and inspired by tools like Obsidian, Notion, and Roam Research.
 
-![NoteMesh Demo](https://via.placeholder.com/800x400/6366f1/ffffff?text=NoteMesh+PKM+System)
+## Live Demo
+
+Experience NoteMesh in action: **[NoteMesh Demo](https://realitystevens.github.io/NoteMesh)**
 
 ## Features
 
@@ -47,9 +49,6 @@
 - **Tag Suggestions**: Smart tag completion based on existing tags
 - **Recent Notes**: Quick access to recently modified notes
 
-## Live Demo
-
-Experience NoteMesh in action: **[NoteMesh Demo](https://realitystevens.github.io/NoteMesh)**
 
 ## 📸 Screenshots
 
